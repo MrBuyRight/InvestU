@@ -8,6 +8,7 @@ function Navigation({ user }) {
         <Link to="/">Financial Advisor</Link>
       </div>
       <div className="nav-links">
+        <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/appointments">Appointments</Link>
         <Link to="/documents">Documents</Link>

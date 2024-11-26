@@ -7,7 +7,9 @@ function Dashboard({ user }) {
   const [investmentSummary, setInvestmentSummary] = useState(null);
 
   useEffect(() => {
-    fetchDashboardData();
+    if (user) {
+      fetchDashboardData();
+    }
   }, [user]);
 
   const fetchDashboardData = async () => {
@@ -21,7 +23,7 @@ function Dashboard({ user }) {
         .order('appointment_date', { ascending: true })
         .limit(3);
 
-      setUpcomingAppointments(appointments);
+      setUpcomingAppointments(appointments || []);
 
       // Fetch recent documents
       const { data: docs } = await supabase
@@ -31,7 +33,7 @@ function Dashboard({ user }) {
         .order('created_at', { ascending: false })
         .limit(5);
 
-      setDocuments(docs);
+      setDocuments(docs || []);
 
       // Fetch investment summary
       const { data: summary } = await supabase
@@ -45,6 +47,10 @@ function Dashboard({ user }) {
       console.error('Error fetching dashboard data:', error);
     }
   };
+
+  if (!user) {
+    return <div>Please log in to view your dashboard</div>;
+  }
 
   return (
     <div className="dashboard">
@@ -93,11 +99,11 @@ function Dashboard({ user }) {
             <div className="summary-stats">
               <div className="stat">
                 <label>Total Investment</label>
-                <value>${investmentSummary.total_invested.toLocaleString()}</value>
+                <value>${investmentSummary.total_invested?.toLocaleString()}</value>
               </div>
               <div className="stat">
                 <label>Current Value</label>
-                <value>${investmentSummary.current_value.toLocaleString()}</value>
+                <value>${investmentSummary.current_value?.toLocaleString()}</value>
               </div>
               <div className="stat">
                 <label>Return</label>
@@ -131,4 +137,4 @@ function Dashboard({ user }) {
   );
 }
 
-export default Dashboard; 
+export default Dashboard;
