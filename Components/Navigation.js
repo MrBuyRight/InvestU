@@ -5,21 +5,17 @@ function Navigation({ user }) {
   return (
     <nav className="main-nav">
       <div className="nav-brand">
-        <Link to="/">Financial Advisor</Link>
+        <Link to="/" style={{ fontSize: '24px', fontWeight: 'bold', textDecoration: 'none', color: '#333' }}>
+          InvestU
+        </Link>
       </div>
       <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
-        <Link to="/appointments">Appointments</Link>
-        <Link to="/documents">Documents</Link>
-        <Link to="/calculators">Financial Tools</Link>
         {user ? (
-          <div className="user-menu">
-            <span>Welcome, {user.full_name}</span>
-            <button className="logout-btn">Logout</button>
-          </div>
+          <span style={{ color: '#007bff' }}>Welcome, {user.full_name}</span>
         ) : (
-          <Link to="/login" className="login-btn">Login</Link>
+          <Link to="/login">Login</Link>
         )}
       </div>
     </nav>
