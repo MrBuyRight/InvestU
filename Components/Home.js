@@ -2,15 +2,9 @@ import React from 'react';
 
 function Home() {
   return (
-    <div style={{ 
-      padding: '20px', 
-      background: 'white', 
-      borderRadius: '8px',
-      margin: '20px',
-      textAlign: 'center' 
-    }}>
+    <div className="home">
       <h1>Welcome to InvestU</h1>
-      <p>Your financial future starts here.</p>
+      <p>Your path to financial success starts here.</p>
     </div>
   );
 }
